@@ -1,7 +1,7 @@
 import './App.css';
 import './audio/AudioPlayer'
 import {AudioPage} from "./audio/AudioPage";
-import {BrowserRouter, Route, Switch, Link} from "react-router-dom"
+import {BrowserRouter, Route, Routes, Link} from "react-router-dom"
 import {ResumePage} from "./resume/ResumePage";
 import {HomePage} from "./home/HomePage";
 import {AdminPage} from "./user/AdminPage";
@@ -12,26 +12,24 @@ function App() {
         <div className="center">
             <div className="container">
                 <div className="App">
-                    <BrowserRouter>
-                        <ul className="navbar">
-                            <li>
-                                <Link to="/">Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/music">Music</Link>
-                            </li>
-                            <li>
-                                <Link to="/resume">CV</Link>
-                            </li>
-                        </ul>
-                        <Switch>
-                            <Route exact path="/" component={HomePage}/>
-                            <Route exact path="/music" component={AudioPage}/>
-                            <Route path="/resume" component={ResumePage}/>
-                            <Route path="/admin" component={AdminPage}/>
-                            <Route path="/*" component={NotFoundPage}/>
-                        </Switch>
-                    </BrowserRouter>
+                    <ul className="navbar">
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/music">Music</Link>
+                        </li>
+                        <li>
+                            <Link to="/resume">CV</Link>
+                        </li>
+                    </ul>
+                        <Routes>
+                            <Route path="/" element={<HomePage/>}/>
+                            <Route path="/music" element={<AudioPage/>}/>
+                            <Route path="/resume" element={<ResumePage/>}/>
+                            <Route path="/admin" element={<AdminPage/>}/>
+                            <Route path="/*" element={<NotFoundPage/>}/>
+                        </Routes>
                 </div>
             </div>
         </div>

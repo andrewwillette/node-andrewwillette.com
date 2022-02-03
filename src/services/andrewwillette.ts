@@ -82,7 +82,7 @@ async function getSoundcloudUrls(): Promise<HttpResponse<SoundcloudUrl[]>> {
  * @returns Promise<HttpResponse<BearerToken>> 
  */
 async function login(username: string, password: string) {
-    logger.info(`Calling login with with username: ${username} , password: ${password}`)
+    logger(`Calling login with with username: ${username} , password: ${password}`)
     const data : Promise<HttpResponse<BearerToken>> = http<BearerToken>(`${serviceLocation}${loginEndpoint}`,
         {username, password}, "POST", "")
     return await data
@@ -93,21 +93,21 @@ async function login(username: string, password: string) {
  * @param url
  */
 async function deleteSoundcloudUrl(url: string) {
-    logger.info(`Calling deleteSoundcloudUrl with url: ${url}`)
+    logger(`Calling deleteSoundcloudUrl with url: ${url}`)
     const data: Promise<HttpResponse<ApiResponse>> = http<ApiResponse>(`${serviceLocation}${deleteSoundcloudEndpoint}`,
         {url}, "DELETE", getBearerToken())
     return await data
 }
 
 async function addSoundcloudUrl(url: string) {
-    logger.info(`Calling addSoundcloudUrl with url: ${url}`)
+    logger(`Calling addSoundcloudUrl with url: ${url}`)
     const data : Promise<HttpResponse<ApiResponse>> = http<ApiResponse>(`${serviceLocation}${addSoundcloudEndpoint}`,
         {url}, "PUT", getBearerToken())
     return await data
 }
 
 async function updateSoundcloudUrls(soundcloudUrls: SoundcloudUrl[]) {
-    logger.info(`Calling updateSoundcloudUrls with soundcloudUrls: ${soundcloudUrls}`)
+    logger(`Calling updateSoundcloudUrls with soundcloudUrls: ${soundcloudUrls}`)
     const data : Promise<HttpResponse<ApiResponse>> = http<ApiResponse>(`${serviceLocation}${batchUpdateSoundcloudEndpoint}`,
         soundcloudUrls, "PUT", getBearerToken())
     return await data
