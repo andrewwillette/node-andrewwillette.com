@@ -1,8 +1,6 @@
-FROM node:17.4.0
-
+FROM node:16.14-alpine
+WORKDIR /app
 COPY --chown=node:node . .
 EXPOSE 80
-ENV NODE_OPTIONS="--openssl-legacy-provider"
 RUN npm install && npm run build
-#CMD ["nohup","npm","run","start-prod"]
-#CMD npm run start-prod
+CMD ["npm","run","start-prod"]
