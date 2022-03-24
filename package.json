@@ -47,6 +47,8 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.16.12"
+    "@babel/core": "^7.16.12",
+    "@types/react-pdf": "^5.0.9",
+    "file-loader": "^6.2.0"
   }
 }

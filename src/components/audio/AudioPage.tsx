@@ -12,7 +12,7 @@ export class AudioPage extends Component<any, any> {
     componentDidMount() {
         getSoundcloudUrls().then(soundcloudUrls => {
             let soundcloudUrlsArray = soundcloudUrls.parsedBody
-            if (soundcloudUrlsArray !== undefined) {
+            if (soundcloudUrlsArray !== undefined && soundcloudUrlsArray !== null) {
                 soundcloudUrlsArray.sort(
                     (v1, v2) => {
                         if(v1.uiOrder > v2.uiOrder){
