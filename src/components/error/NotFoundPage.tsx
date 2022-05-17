@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 
 export class NotFoundPage extends Component<any, any> {
-    render() {
-        return (
-            <div>
-                <p>
-                    Page not found.
-                </p>
-            </div>
-        );
-    }
+	render() {
+		return (
+			<div>
+				<p>
+					Page not found.
+				</p>
+			</div>
+		);
+	}
 }

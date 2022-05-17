@@ -1,7 +1,7 @@
 import './App.css';
 import './audio/AudioPlayer'
 import {AudioPage} from "./audio/AudioPage";
-import {BrowserRouter, Route, Routes, Link} from "react-router-dom"
+import {Route, Routes, Link} from "react-router-dom"
 import {ResumePage} from "./resume/ResumePage";
 import {HomePage} from "./home/HomePage";
 import {AdminPage} from "./user/AdminPage";

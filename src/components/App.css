@@ -64,6 +64,8 @@ a:hover {
 #personalBio {
     width: 60%;
     display: inline-block;
+	white-space: break-spaces;
+	font-size: 1.5rem;
 }
 
 #adminPage input {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import homepage_photo from './homepage_photo.jpg';
 import "./homePage.css";
 
