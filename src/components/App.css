@@ -57,15 +57,15 @@ a:hover {
 }
 
 .personalImage {
-    height: 40vmin;
+    height: 70vmin;
     pointer-events: none;
 }
 
-#personalBio {
-    width: 60%;
-    display: inline-block;
+#home-page p {
 	white-space: break-spaces;
+    width: 60%;
 	font-size: 1.5rem;
+    display: inline-block;
 }
 
 #adminPage input {

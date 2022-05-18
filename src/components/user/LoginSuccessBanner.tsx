@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 export class LoginSuccessBanner extends Component<any, any> {
 	render() {
