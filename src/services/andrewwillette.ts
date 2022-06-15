@@ -2,7 +2,7 @@ import { getBearerToken } from "../persistence/localstorage"
 import { production } from "../config"
 import { logger } from "../logging";
 
-export { getSoundcloudUrls, login, deleteSoundcloudUrl, addSoundcloudUrl, updateSoundcloudUrls }
+export { getSoundcloudUrls, login, deleteSoundcloudUrl, addSoundcloudUrl, updateSoundcloudUrls, getKeyOfDay }
 export type { BearerToken, SoundcloudUrl, HttpResponse }
 
 const serviceLocation = production ? "http://andrewwillette.com:9099" : "http://localhost:9099"
@@ -10,6 +10,7 @@ const serviceLocation = production ? "http://andrewwillette.com:9099" : "http://
 const getSoundcloudAllEndpoint = "/get-soundcloud-urls"
 const addSoundcloudEndpoint = "/add-soundcloud-url"
 const batchUpdateSoundcloudEndpoint = "/update-soundcloud-urls"
+const keyOfDayEndpoint = "/keyOfDay"
 const deleteSoundcloudEndpoint = "/delete-soundcloud-url"
 const loginEndpoint = "/login"
 
@@ -18,6 +19,9 @@ const loginEndpoint = "/login"
  */
 interface BearerToken {
 	bearerToken: string
+}
+interface KeyOfDay {
+	keyOfDay: string
 }
 
 interface HttpResponse<T> extends Response {
@@ -67,9 +71,13 @@ async function http<T>(request: RequestInfo, body: any, method: string, authoriz
 	}
 }
 
+function getRequestInfo(resourceEndpoint: String) : RequestInfo {
+	return `${serviceLocation}${resourceEndpoint}`
+}
+
 async function getSoundcloudUrls(): Promise<HttpResponse<SoundcloudUrl[]>> {
 	const data: Promise<HttpResponse<SoundcloudUrl[]>> = http<SoundcloudUrl[]>(
-		`${serviceLocation}${getSoundcloudAllEndpoint}`, null, "GET", ""
+		getRequestInfo(getSoundcloudAllEndpoint), null, "GET", ""
 	)
 	return await data
 }
@@ -83,7 +91,7 @@ async function getSoundcloudUrls(): Promise<HttpResponse<SoundcloudUrl[]>> {
  */
 async function login(username: string, password: string) {
 	logger(`Calling login with with username: ${username} , password: ${password}`)
-	const data: Promise<HttpResponse<BearerToken>> = http<BearerToken>(`${serviceLocation}${loginEndpoint}`,
+	const data: Promise<HttpResponse<BearerToken>> = http<BearerToken>(getRequestInfo(loginEndpoint),
 		{ username, password }, "POST", "")
 	return await data
 }
@@ -94,22 +102,28 @@ async function login(username: string, password: string) {
  */
 async function deleteSoundcloudUrl(url: string) {
 	logger(`Calling deleteSoundcloudUrl with url: ${url}`)
-	const data: Promise<HttpResponse<ApiResponse>> = http<ApiResponse>(`${serviceLocation}${deleteSoundcloudEndpoint}`,
+	const data: Promise<HttpResponse<ApiResponse>> = http<ApiResponse>(getRequestInfo(deleteSoundcloudEndpoint),
 		{ url }, "DELETE", getBearerToken())
 	return await data
 }
 
 async function addSoundcloudUrl(url: string) {
 	logger(`Calling addSoundcloudUrl with url: ${url}`)
-	const data: Promise<HttpResponse<ApiResponse>> = http<ApiResponse>(`${serviceLocation}${addSoundcloudEndpoint}`,
+	const data: Promise<HttpResponse<ApiResponse>> = http<ApiResponse>(getRequestInfo(addSoundcloudEndpoint),
 		{ url }, "PUT", getBearerToken())
 	return await data
 }
 
 async function updateSoundcloudUrls(soundcloudUrls: SoundcloudUrl[]) {
 	logger(`Calling updateSoundcloudUrls with soundcloudUrls: ${soundcloudUrls}`)
-	const data: Promise<HttpResponse<ApiResponse>> = http<ApiResponse>(`${serviceLocation}${batchUpdateSoundcloudEndpoint}`,
+	const data: Promise<HttpResponse<ApiResponse>> = http<ApiResponse>(getRequestInfo(batchUpdateSoundcloudEndpoint),
 		soundcloudUrls, "PUT", getBearerToken())
 	return await data
 }
 
+async function getKeyOfDay(): Promise<HttpResponse<KeyOfDay>> {
+	logger(`Calling keyOfDay endpoint.`)
+	const data: Promise<HttpResponse<KeyOfDay>> = http<KeyOfDay>(getRequestInfo(keyOfDayEndpoint),
+	null, "GET", "")
+	return await data
+}

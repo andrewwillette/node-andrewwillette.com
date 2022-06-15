@@ -5,6 +5,7 @@ import { Route, Routes, Link } from "react-router-dom"
 import { ResumePage } from "./resume/ResumePage";
 import { HomePage } from "./home/HomePage";
 import { AdminPage } from "./user/AdminPage";
+import { KeyOfDay } from "./keyOfDay/KeyOfDay";
 import { NotFoundPage } from "./error/NotFoundPage";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
 						<Route path="/music" element={<AudioPage />} />
 						<Route path="/resume" element={<ResumePage />} />
 						<Route path="/admin" element={<AdminPage />} />
+						<Route path="/kod" element={<KeyOfDay />} />
 						<Route path="/*" element={<NotFoundPage />} />
 					</Routes>
 				</div>
