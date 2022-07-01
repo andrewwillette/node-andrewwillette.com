@@ -76,6 +76,8 @@ function getRequestInfo(resourceEndpoint: String) : RequestInfo {
 }
 
 async function getSoundcloudUrls(): Promise<HttpResponse<SoundcloudUrl[]>> {
+	console.log("swag")
+	console.log(getSoundcloudAllEndpoint)
 	const data: Promise<HttpResponse<SoundcloudUrl[]>> = http<SoundcloudUrl[]>(
 		getRequestInfo(getSoundcloudAllEndpoint), null, "GET", ""
 	)
